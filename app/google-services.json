@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "265346745504",
+    "firebase_url": "https://signin-bcc95.firebaseio.com",
+    "project_id": "signin-bcc95",
+    "storage_bucket": "signin-bcc95.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:265346745504:android:11658ec19ccf601aea35c5",
+        "android_client_info": {
+          "package_name": "cycle.gear.googlesignin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "265346745504-94lc78jf499qkbpsvpo8fm95jcs4tq9d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDl2waiId-il31bLNyayZpB-y6sTN6-HWQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "265346745504-94lc78jf499qkbpsvpo8fm95jcs4tq9d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:265346745504:android:be6f0ca65ac88f9aea35c5",
+        "android_client_info": {
+          "package_name": "cycle.gear.googlesignin2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "265346745504-94lc78jf499qkbpsvpo8fm95jcs4tq9d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDl2waiId-il31bLNyayZpB-y6sTN6-HWQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "265346745504-94lc78jf499qkbpsvpo8fm95jcs4tq9d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
