@@ -9,4 +9,8 @@
     <string name="bottom_nav">Bottom Nav</string>
     <string name="tablayout">TabLayout</string>
     <string name="sign_out">Sign Out</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+
 </resources>
