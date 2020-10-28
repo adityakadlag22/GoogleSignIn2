@@ -11,11 +11,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
     private val RC_SIGN_IN = 1
     private lateinit var auth: FirebaseAuth
+    private lateinit var firedb: FirebaseDatabase
+    private var myRef = FirebaseDatabase.getInstance().getReference("Users")
     private val TAG = "LoginActivity"
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var gso: GoogleSignInOptions
@@ -36,10 +39,12 @@ class LoginActivity : AppCompatActivity() {
 
 
     }
+
     private fun signInGoogle() {
         val signInIntent: Intent = mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -67,6 +72,9 @@ class LoginActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
+                    if (user != null) {
+                        myRef.child(user.uid).child("username").setValue(user.displayName)
+                    }
                     Toast.makeText(this, user.toString(), Toast.LENGTH_SHORT).show()
                     Intent(this, MainActivity::class.java).also {
                         startActivity(it)
