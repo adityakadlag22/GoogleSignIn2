@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -12,6 +11,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
     private val RC_SIGN_IN = 1
@@ -30,18 +30,16 @@ class LoginActivity : AppCompatActivity() {
             .build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        findViewById<View>(R.id.sign_in_btn).setOnClickListener {
+        sign_in_btn.setOnClickListener {
             signInGoogle()
         }
 
 
     }
-
     private fun signInGoogle() {
         val signInIntent: Intent = mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -75,11 +73,7 @@ class LoginActivity : AppCompatActivity() {
                         finish()
                     }
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
-
                 }
-
             }
     }
-
-
 }

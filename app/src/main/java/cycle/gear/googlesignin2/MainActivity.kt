@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -14,28 +15,50 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
-    private lateinit var toggle:ActionBarDrawerToggle
+    private lateinit var toggle: ActionBarDrawerToggle
+    private val TAG = "MainActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         auth = FirebaseAuth.getInstance()
-      //  toolbar=findViewById(R.id.toolBarMain)
         setSupportActionBar(toolBarMain)
         checkUser()
 
 
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toggle= ActionBarDrawerToggle(this,drawerLayoutMain,R.string.open,R.string.close)
+        toggle = ActionBarDrawerToggle(this, drawerLayoutMain, R.string.open, R.string.close)
         drawerLayoutMain.addDrawerListener(toggle)
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener {
-            when(it.itemId)
-            {
-              R.id.firebaseDatabase->{toast("Working on Firebase Database ")}
+            when (it.itemId) {
+                R.id.firebaseDatabase -> {
+                    toast("Working on Firebase Database ")
+                }
 
-              R.id.fireFCM->{ toast("Working on Firebase FCM ")}
+                R.id.fireFCM -> {
+                    toast("Working on Firebase FCM ")
+                }
+
+                R.id.emailAuth -> {
+                    toast("Working on Firebase Email Auth ")
+                }
+
+                R.id.bottomNav -> {
+                    toast("Working on bottomNav ")
+                }
+
+                R.id.tabLayoutDemo -> {
+                    toast("Working on Tab Layout ")
+                }
+
+                R.id.signOutTabNav -> {
+                    auth.signOut()
+                    checkUser()
+                    toast("Signing Out ")
+                }
+
 
 
             }
@@ -43,15 +66,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkUser()
-    {
+    private fun checkUser() {
         val user = auth.currentUser
         Handler().postDelayed({
             if (user != null) {
-                Toast.makeText(this, user.toString(), Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "checkUser: ${user.displayName} ")
             } else {
                 Toast.makeText(this, "No User", Toast.LENGTH_SHORT).show()
-                Intent(this,LoginActivity::class.java).also {
+                Intent(this, LoginActivity::class.java).also {
                     startActivity(it)
                     finish()
                 }
@@ -60,9 +82,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (toggle.onOptionsItemSelected(item))
-        {
-          return true
+        if (toggle.onOptionsItemSelected(item)) {
+            return true
         }
         return super.onOptionsItemSelected(item)
     }
