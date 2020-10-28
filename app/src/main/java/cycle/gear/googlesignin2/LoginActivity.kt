@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : AppCompatActivity() {
     private val RC_SIGN_IN = 1
     private lateinit var auth: FirebaseAuth
-    private lateinit var firedb: FirebaseDatabase
     private var myRef = FirebaseDatabase.getInstance().getReference("Users")
     private val TAG = "LoginActivity"
     private lateinit var mGoogleSignInClient: GoogleSignInClient
@@ -73,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
                     Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
                     if (user != null) {
-                        myRef.child(user.uid).child("username").setValue(user.displayName)
+                        myRef.child(user.uid).child("uid").setValue(user.uid)
                     }
                     Toast.makeText(this, user.toString(), Toast.LENGTH_SHORT).show()
                     Intent(this, MainActivity::class.java).also {

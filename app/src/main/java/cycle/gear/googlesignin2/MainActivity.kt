@@ -34,7 +34,9 @@ class MainActivity : AppCompatActivity() {
         navView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.firebaseDatabase -> {
-                    toast("Working on Firebase Database ")
+                    Intent(this,FireDatabase::class.java).also {
+                    startActivity(it)
+                    }
                 }
 
                 R.id.fireFCM -> {
