@@ -13,6 +13,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_fire_database.*
 
 class FireDatabase : AppCompatActivity() {
     private lateinit var firedb:FirebaseDatabase
@@ -33,7 +34,7 @@ class FireDatabase : AppCompatActivity() {
     myRef.child(user.uid).addValueEventListener(object: ValueEventListener{
         override fun onDataChange(snapshot: DataSnapshot) {
         val data:Boolean=snapshot.hasChild("userdata")
-        if (data){toast("User Has Data")}
+        if (data){LoadData()}
         else
         {
          GetDataFromActivity()
@@ -42,6 +43,24 @@ class FireDatabase : AppCompatActivity() {
 
         override fun onCancelled(error: DatabaseError) {
         toast(error.toString())
+        }
+    })
+    }
+
+    private fun LoadData() {
+    myRef.child(user.uid).addValueEventListener(object: ValueEventListener{
+        override fun onDataChange(snapshot: DataSnapshot) {
+        val username=snapshot.child("userdata").child("username").getValue()
+        val userAge=snapshot.child("userdata").child("userage").getValue()
+        if (username!=null && userAge!= null)
+        {
+         userName_txt.text=username.toString()
+         userAge_txt.text=userAge.toString()
+        }
+        }
+
+        override fun onCancelled(error: DatabaseError) {
+            TODO("Not yet implemented")
         }
     })
     }
