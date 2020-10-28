@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         auth= FirebaseAuth.getInstance()
         listener=FirebaseAuth.AuthStateListener {
-            val user=auth.currentUser
+            var user=FirebaseAuth.getInstance().currentUser
             Handler().postDelayed({
                 if (user==null)
                 {
