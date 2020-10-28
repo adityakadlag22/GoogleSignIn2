@@ -10,7 +10,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_fire_database.*
+import kotlinx.android.synthetic.main.activity_get_user_data.*
 
 class GetUserData : AppCompatActivity() {
     private var myRef = FirebaseDatabase.getInstance().getReference("Users")

@@ -8,32 +8,17 @@
     android:layout_height="match_parent"
     tools:context=".FireDatabase">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/userName_Edit"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginTop="100dp"
-        android:hint="@string/username"/>
+        android:id="@+id/userName_txt"
+        android:text="@string/username"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        />
 
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/userAge_Edit"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginTop="100dp"
-        android:hint="@string/age"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/submitData_btn"
-        android:text="@string/submit"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"/>
 
 
 </LinearLayout>

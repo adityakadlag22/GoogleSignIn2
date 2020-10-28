@@ -24,6 +24,8 @@ class FireDatabase : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fire_database)
         mAuth = FirebaseAuth.getInstance()
+        checkUser()
+        user=mAuth.currentUser!!
         CheckUserHasData()
     }
 
@@ -45,7 +47,9 @@ class FireDatabase : AppCompatActivity() {
     }
 
     private fun GetDataFromActivity() {
-
+    Intent(this,GetUserData::class.java).also {
+        startActivity(it)
+    }
     }
 
     private fun checkUser() {
