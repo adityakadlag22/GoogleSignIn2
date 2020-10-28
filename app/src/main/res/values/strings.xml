@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">GoogleSignIn2</string>
     <string name="log_out">Log Out</string>
+    <string name="database">Database</string>
+    <string name="firebase">Firebase</string>
+    <string name="email_auth">Email Auth</string>
+    <string name="fcm">FCM</string>
+    <string name="design_components">Design Components</string>
+    <string name="bottom_nav">Bottom Nav</string>
+    <string name="tablayout">TabLayout</string>
+    <string name="sign_out">Sign Out</string>
 </resources>

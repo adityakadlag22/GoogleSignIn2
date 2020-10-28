@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <group android:id="@+id/firebaseGroup">
+
+        <item android:title="@string/firebase">
+          <menu>
+              <item
+                  android:title="@string/database"
+                  android:id="@+id/firebaseDatabase"
+                  />
+              <item
+                  android:title="@string/email_auth"
+                  android:id="@+id/emailAuth"
+                  />
+              <item android:title="@string/fcm"
+                  android:id="@+id/fireFCM"/>
+          </menu>
+        </item>
+
+        <item android:title="@string/design_components"
+            android:id="@+id/designCompo">
+            <menu>
+            <item android:title="@string/bottom_nav"
+                android:id="@+id/bottomNav"/>
+            <item android:title="@string/tablayout"
+                android:id="@+id/tabLayoutDemo"
+                />
+            </menu>
+        </item>
+
+        <item android:title="@string/sign_out"
+            android:id="@+id/signOutTabNav">
+
+        </item>
+
+    </group>
+</menu>
