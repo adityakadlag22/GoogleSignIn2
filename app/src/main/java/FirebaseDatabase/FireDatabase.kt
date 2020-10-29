@@ -1,6 +1,6 @@
 package FirebaseDatabase
 
-import FirebaseRecycler.UserHabits
+import FirebaseDatabase.FirebaseRecycler.UserHabits
 import Utils.toast
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

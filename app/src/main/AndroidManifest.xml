@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="FirebaseRecycler.UserHabits"></activity>
+        <activity android:name="FirebaseDatabase.FirebaseRecycler.UserHabits"></activity>
         <activity android:name="FirebaseDatabase.GetUserData" />
         <activity android:name="FirebaseDatabase.FireDatabase" />
         <activity android:name=".LoginActivity" />

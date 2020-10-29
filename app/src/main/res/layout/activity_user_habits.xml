@@ -6,12 +6,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="FirebaseRecycler.UserHabits">
+    tools:context="FirebaseDatabase.FirebaseRecycler.UserHabits">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="4dp"
+        android:clipToPadding="false"
+        tools:listitem="@layout/habitlistitem"
         android:id="@+id/habit_RecyclerView">
 
     </androidx.recyclerview.widget.RecyclerView>
