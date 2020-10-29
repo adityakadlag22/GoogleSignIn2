@@ -1,5 +1,6 @@
-package cycle.gear.googlesignin2
+package FirebaseDatabase
 
+import FirebaseRecycler.UserHabits
 import Utils.toast
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -13,10 +14,11 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import cycle.gear.googlesignin2.LoginActivity
+import cycle.gear.googlesignin2.R
 import kotlinx.android.synthetic.main.activity_fire_database.*
 
 class FireDatabase : AppCompatActivity() {
-    private lateinit var firedb:FirebaseDatabase
     private var myRef=FirebaseDatabase.getInstance().getReference("Users")
     private lateinit var mAuth:FirebaseAuth
     private val TAG = "FireDatabase"
@@ -27,17 +29,22 @@ class FireDatabase : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
         checkUser()
         user=mAuth.currentUser!!
-        CheckUserHasData()
+        checkUserHasData()
+        userHabitsBtn.setOnClickListener {
+        Intent(this,UserHabits::class.java).also {
+        startActivity(it)
+        }
+        }
     }
 
-    private fun CheckUserHasData() {
+    private fun checkUserHasData() {
     myRef.child(user.uid).addValueEventListener(object: ValueEventListener{
         override fun onDataChange(snapshot: DataSnapshot) {
         val data:Boolean=snapshot.hasChild("userdata")
-        if (data){LoadData()}
+        if (data){loadData()}
         else
         {
-         GetDataFromActivity()
+         getDataFromAct()
         }
         }
 
@@ -47,11 +54,11 @@ class FireDatabase : AppCompatActivity() {
     })
     }
 
-    private fun LoadData() {
+    private fun loadData() {
     myRef.child(user.uid).addValueEventListener(object: ValueEventListener{
         override fun onDataChange(snapshot: DataSnapshot) {
-        val username=snapshot.child("userdata").child("username").getValue()
-        val userAge=snapshot.child("userdata").child("userage").getValue()
+        val username=snapshot.child("userdata").child("username").value
+        val userAge=snapshot.child("userdata").child("userage").value
         if (username!=null && userAge!= null)
         {
          userName_txt.text=username.toString()
@@ -60,13 +67,13 @@ class FireDatabase : AppCompatActivity() {
         }
 
         override fun onCancelled(error: DatabaseError) {
-            TODO("Not yet implemented")
+        toast(error.message)
         }
     })
     }
 
-    private fun GetDataFromActivity() {
-    Intent(this,GetUserData::class.java).also {
+    private fun getDataFromAct() {
+    Intent(this, GetUserData::class.java).also {
         startActivity(it)
     }
     }

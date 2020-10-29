@@ -1,5 +1,6 @@
 package cycle.gear.googlesignin2
 
+import FirebaseDatabase.FireDatabase
 import Utils.toast
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         navView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.firebaseDatabase -> {
-                    Intent(this,FireDatabase::class.java).also {
+                    Intent(this, FireDatabase::class.java).also {
                     startActivity(it)
                     }
                 }
@@ -53,6 +54,10 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.tabLayoutDemo -> {
                     toast("Working on Tab Layout ")
+                }
+
+                R.id.fireStorage->{
+                    toast("Working on it")
                 }
 
                 R.id.signOutTabNav -> {

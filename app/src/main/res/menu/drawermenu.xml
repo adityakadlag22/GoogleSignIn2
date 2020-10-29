@@ -17,6 +17,8 @@
                   />
               <item android:title="@string/fcm"
                   android:id="@+id/fireFCM"/>
+              <item android:title="@string/firebase_storage"
+                  android:id="@+id/fireStorage"/>
           </menu>
         </item>
 

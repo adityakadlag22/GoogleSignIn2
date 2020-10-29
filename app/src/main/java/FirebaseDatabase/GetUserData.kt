@@ -1,4 +1,4 @@
-package cycle.gear.googlesignin2
+package FirebaseDatabase
 
 import Utils.toast
 import android.content.Intent
@@ -10,6 +10,8 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
+import cycle.gear.googlesignin2.LoginActivity
+import cycle.gear.googlesignin2.R
 import kotlinx.android.synthetic.main.activity_get_user_data.*
 
 class GetUserData : AppCompatActivity() {
@@ -44,7 +46,7 @@ class GetUserData : AppCompatActivity() {
     }
 
     private fun SendUserToDataActivity() {
-        Intent(this,FireDatabase::class.java).also {
+        Intent(this, FireDatabase::class.java).also {
             startActivity(it)
             toast("Data Added")
             finish()
