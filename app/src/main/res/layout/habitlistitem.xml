@@ -9,6 +9,7 @@
     >
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="#a9a9a9"
         android:layout_height="wrap_content">
 
 
