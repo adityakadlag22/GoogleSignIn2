@@ -20,6 +20,7 @@
     <string name="habit">Habit</string>
     <string name="_10">10</string>
     <string name="all_user_description">All User Description</string>
+    <string name="todo">TODO</string>
 
 
 </resources>

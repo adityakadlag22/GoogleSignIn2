@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="FirebaseDatabase.FirebaseRecycler.UserHabits">
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/habit_RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="4dp"
         android:clipToPadding="false"
-        tools:listitem="@layout/habitlistitem"
-        android:id="@+id/habit_RecyclerView">
+        android:padding="4dp"
+        tools:listitem="@layout/habitlistitem">
 
     </androidx.recyclerview.widget.RecyclerView>
-</LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/habits_FloatingActionBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        app:backgroundTint="@color/purple_200"
+        android:layout_margin="16dp"
+        android:src="@drawable/plus"
+        app:fabSize="normal"
+        android:layout_alignParentRight="true" />
+</RelativeLayout>
