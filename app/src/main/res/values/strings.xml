@@ -21,6 +21,11 @@
     <string name="_10">10</string>
     <string name="all_user_description">All User Description</string>
     <string name="todo">TODO</string>
+    <string name="habit_name">Habit Name</string>
+    <string name="add">add</string>
+    <string name="cancel">Cancel</string>
+    <string name="description">Description</string>
+    <string name="priority">Priority</string>
 
 
 </resources>
