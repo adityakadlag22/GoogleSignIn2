@@ -73,6 +73,7 @@ class LoginActivity : AppCompatActivity() {
                     val user = auth.currentUser
                     if (user != null) {
                         myRef.child(user.uid).child("uid").setValue(user.uid)
+                        myRef.child(user.uid).child("userhabits").setValue("no habit-")
                     }
                     Toast.makeText(this, user.toString(), Toast.LENGTH_SHORT).show()
                     Intent(this, MainActivity::class.java).also {

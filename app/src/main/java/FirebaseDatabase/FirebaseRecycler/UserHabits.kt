@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+
 import com.google.firebase.database.FirebaseDatabase
 import cycle.gear.googlesignin2.LoginActivity
 import cycle.gear.googlesignin2.R
@@ -22,20 +23,21 @@ import kotlinx.android.synthetic.main.activity_user_habits.*
 import kotlinx.android.synthetic.main.layout_habits_dialog.view.*
 
 class UserHabits : AppCompatActivity() {
-    private var myRef = FirebaseDatabase.getInstance().getReference("Users")
+    private var database = FirebaseDatabase.getInstance().getReference()
+    private var myRef = database.child("Users")
     private lateinit var mAuth: FirebaseAuth
     private lateinit var user: FirebaseUser
     private val TAG = "UserHabits"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_habits)
-        mAuth= FirebaseAuth.getInstance()
+        mAuth = FirebaseAuth.getInstance()
 
         setSupportActionBar(toolBar_habitsAct)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(true)
         checkUser()
-        val exampleHabits = dummyTestHabit(10)
+        val exampleHabits = dummyTestHabit(1)
         habit_RecyclerView.adapter = HabitsAdapter(exampleHabits)
         habit_RecyclerView.layoutManager = LinearLayoutManager(this)
         habit_RecyclerView.setHasFixedSize(true)
@@ -68,14 +70,18 @@ class UserHabits : AppCompatActivity() {
             val habitdesc = mDialog.userHabitDesc_edit.text
             val habitprior = mDialog.userHabitPrior_edit.text
 
-            if (habitname.isEmpty() || habitdesc.isEmpty()||habitprior.isEmpty())
-            {
-              toast("Fill The Fields")  
-            }    
-            else
-            {
-                Log.d(TAG, "openDialog: done")
-            }    
+            if (habitname.isEmpty() || habitdesc.isEmpty() || habitprior.isEmpty()) {
+                toast("Fill The Fields")
+            } else {
+                val habit = UserHabit(
+                    habitName = habitname.toString(),
+                    habitprior.toString(),
+                    habitdesc.toString()
+                )
+                val id =myRef.child("userhabits").push().key
+
+                myRef.child(user.uid).child("userhabits").child(id.toString()).setValue(habit)
+            }
         }
         mDialog.cancelBtnHabit.setOnClickListener {
             mAlertDialog.dismiss()
@@ -85,7 +91,7 @@ class UserHabits : AppCompatActivity() {
     private fun dummyTestHabit(size: Int): List<UserHabit> {
         val list = ArrayList<UserHabit>()
         for (i in 1 until size) {
-            val item = UserHabit("habit $i", description = "desc $i", habitPriority = i)
+            val item = UserHabit("habit $i", description = "desc $i", habitPriority = i.toString())
             list += item
         }
         return list
