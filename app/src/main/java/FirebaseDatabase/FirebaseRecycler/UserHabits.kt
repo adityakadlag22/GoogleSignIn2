@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_user_habits.*
 import kotlinx.android.synthetic.main.layout_habits_dialog.view.*
 
 class UserHabits : AppCompatActivity() {
-    private var database = FirebaseDatabase.getInstance().getReference()
+    private var database = FirebaseDatabase.getInstance().reference
     private var myRef = database.child("Users")
     private lateinit var mAuth: FirebaseAuth
     private lateinit var user: FirebaseUser
@@ -37,7 +37,8 @@ class UserHabits : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(true)
         checkUser()
-        val exampleHabits = dummyTestHabit(1)
+
+        val exampleHabits = ArrayList<UserHabit>()
         habit_RecyclerView.adapter = HabitsAdapter(exampleHabits)
         habit_RecyclerView.layoutManager = LinearLayoutManager(this)
         habit_RecyclerView.setHasFixedSize(true)
@@ -78,7 +79,7 @@ class UserHabits : AppCompatActivity() {
                     habitprior.toString(),
                     habitdesc.toString()
                 )
-                val id =myRef.child("userhabits").push().key
+                val id = myRef.child("userhabits").push().key
 
                 myRef.child(user.uid).child("userhabits").child(id.toString()).setValue(habit)
             }
@@ -88,14 +89,7 @@ class UserHabits : AppCompatActivity() {
         }
     }
 
-    private fun dummyTestHabit(size: Int): List<UserHabit> {
-        val list = ArrayList<UserHabit>()
-        for (i in 1 until size) {
-            val item = UserHabit("habit $i", description = "desc $i", habitPriority = i.toString())
-            list += item
-        }
-        return list
-    }
+
 
     private fun checkUser() {
         val user1 = mAuth.currentUser
