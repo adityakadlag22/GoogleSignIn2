@@ -18,7 +18,7 @@ class LoginActivity : AppCompatActivity() {
     private val RC_SIGN_IN = 1
     private lateinit var auth: FirebaseAuth
     private var myRef = FirebaseDatabase.getInstance().getReference("Users")
-    private val TAG = "LoginActivity"
+    private val tag = "LoginActivity"
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var gso: GoogleSignInOptions
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,17 +47,16 @@ class LoginActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
-                Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
+                Log.d(tag, "firebaseAuthWithGoogle:" + account.id)
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e)
+                Log.w(tag, "Google sign in failed", e)
                 // ...
             }
         }
@@ -68,8 +67,7 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCredential:success")
+                    Log.d(tag, "signInWithCredential:success")
                     val user = auth.currentUser
                     if (user != null) {
                         myRef.child(user.uid).child("uid").setValue(user.uid)
@@ -80,7 +78,7 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(it)
                         finish()
                     }
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    Log.w(tag, "signInWithCredential:failure", task.exception)
                 }
             }
     }

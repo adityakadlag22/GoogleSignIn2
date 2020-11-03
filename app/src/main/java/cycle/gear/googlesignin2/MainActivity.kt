@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         drawerLayoutMain.addDrawerListener(toggle)
         toggle.syncState()
 
-        navView.setNavigationItemSelectedListener {
+        navView.setNavigationItemSelectedListener { it ->
             when (it.itemId) {
                 R.id.firebaseDatabase -> {
                     Intent(this, FireDatabase::class.java).also {
@@ -65,8 +65,6 @@ class MainActivity : AppCompatActivity() {
                     checkUser()
                     toast("Signing Out ")
                 }
-
-
 
             }
             true
