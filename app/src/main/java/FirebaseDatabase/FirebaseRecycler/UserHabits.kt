@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.*
 
-import com.google.firebase.database.FirebaseDatabase
 import cycle.gear.googlesignin2.LoginActivity
 import cycle.gear.googlesignin2.R
 import kotlinx.android.synthetic.main.activity_user_habits.*
@@ -24,24 +24,28 @@ import kotlinx.android.synthetic.main.layout_habits_dialog.view.*
 
 class UserHabits : AppCompatActivity() {
     private var database = FirebaseDatabase.getInstance().reference
-    private var myRef = database.child("Users")
+    private lateinit var myRef:DatabaseReference
+    private var dataref = database.child("Users")
     private lateinit var mAuth: FirebaseAuth
+    var adapter = HabitsAdapter2(this)
     private lateinit var user: FirebaseUser
     private val TAG = "UserHabits"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_habits)
         mAuth = FirebaseAuth.getInstance()
+        myRef= database.child("Users")
 
         setSupportActionBar(toolBar_habitsAct)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(true)
         checkUser()
 
-        val exampleHabits = ArrayList<UserHabit>()
-        habit_RecyclerView.adapter = HabitsAdapter(exampleHabits)
+        habit_RecyclerView.adapter = adapter
         habit_RecyclerView.layoutManager = LinearLayoutManager(this)
         habit_RecyclerView.setHasFixedSize(true)
+
+        getAllHabits()
 
         habit_RecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -91,6 +95,28 @@ class UserHabits : AppCompatActivity() {
 
 
 
+
+    private fun getAllHabits() {
+        myRef=FirebaseDatabase.getInstance().reference
+        myRef = myRef.child(user.uid).child("userhabits")
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.hasChildren()) {
+                    val habitList = ArrayList<UserHabit>()
+                    for (snap in snapshot.children) {
+                        habitList.add(snap.getValue(UserHabit::class.java)!!)
+                    }
+                    adapter.addAll(habitList)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
     private fun checkUser() {
         val user1 = mAuth.currentUser
         Handler().postDelayed({
@@ -106,4 +132,6 @@ class UserHabits : AppCompatActivity() {
             }
         }, 2000)
     }
+
+
 }
