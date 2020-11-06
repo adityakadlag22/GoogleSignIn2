@@ -26,6 +26,8 @@
         android:id="@+id/habit_RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="vertical"
+
         android:layout_below="@id/appbarLay2"
         android:clipToPadding="false"
         android:padding="4dp"
