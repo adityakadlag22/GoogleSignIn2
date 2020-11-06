@@ -24,7 +24,6 @@ import kotlinx.android.synthetic.main.activity_user_habits.*
 import kotlinx.android.synthetic.main.layout_habits_dialog.view.*
 
 class UserHabits : AppCompatActivity() {
-    private var database = FirebaseDatabase.getInstance().reference
     private var myRef = FirebaseDatabase.getInstance().getReference("Users")
     private lateinit var mAuth: FirebaseAuth
     var adapter = HabitsAdapter2(this)
