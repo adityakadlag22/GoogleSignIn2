@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:weightSum="100"
-    android:padding="5dp"
-    android:layout_height="wrap_content"
-    >
+<!--<com.google.android.material.card.MaterialCardView-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:weightSum="100"-->
+<!--    android:padding="5dp"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    >-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="#a9a9a9"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        >
 
 
         <LinearLayout
@@ -24,10 +25,10 @@
                 android:text="@string/habit"
                 android:layout_weight="40"
                 android:id="@+id/user_Habit"
-                android:textSize="35sp"
+                android:textSize="28sp"
                 android:layout_marginTop="10sp"
-                android:layout_marginStart="20sp"
-                android:layout_marginEnd="20sp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
                 />
             <View
                 android:layout_width="0dp"
@@ -63,4 +64,4 @@
 
 
     </RelativeLayout>
-</com.google.android.material.card.MaterialCardView>
+<!--</com.google.android.material.card.MaterialCardView>-->
