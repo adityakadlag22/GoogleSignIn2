@@ -24,6 +24,9 @@ class HabitsAdapter2(internal var context: Context) : RecyclerView.Adapter<Habit
      notifyItemRangeChanged(init,userList.size)
     }
 
+    fun clearall(){
+    userList.clear()
+    }
 
 
     init {

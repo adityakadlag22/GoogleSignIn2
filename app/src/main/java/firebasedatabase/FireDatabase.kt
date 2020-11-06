@@ -35,6 +35,7 @@ class FireDatabase : AppCompatActivity() {
         startActivity(it)
         }
         }
+
     }
 
     private fun checkUserHasData() {

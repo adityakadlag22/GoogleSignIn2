@@ -24,24 +24,19 @@ import kotlinx.android.synthetic.main.layout_habits_dialog.view.*
 
 class UserHabits : AppCompatActivity() {
     private var database = FirebaseDatabase.getInstance().reference
-    private var myRef=FirebaseDatabase.getInstance().getReference("Users")
+    private var myRef = FirebaseDatabase.getInstance().getReference("Users")
     private lateinit var mAuth: FirebaseAuth
     var adapter = HabitsAdapter2(this)
     private lateinit var user: FirebaseUser
     private val TAG = "UserHabits"
+    var habitList = ArrayList<UserHabit>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_habits)
-        mAuth = FirebaseAuth.getInstance()
+        init()
 
-        setSupportActionBar(toolBar_habitsAct)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowTitleEnabled(true)
-        checkUser()
 
-        habit_RecyclerView.adapter = adapter
-        habit_RecyclerView.layoutManager = LinearLayoutManager(this)
-        habit_RecyclerView.setHasFixedSize(true)
+
 
 
         habit_RecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -59,6 +54,22 @@ class UserHabits : AppCompatActivity() {
         habits_FloatingActionBtn.setOnClickListener {
             openDialog()
         }
+    }
+
+    private fun init() {
+        //Auth
+        mAuth = FirebaseAuth.getInstance()
+        //Toolbar
+        setSupportActionBar(toolBar_habitsAct)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(true)
+        //User
+        checkUser()
+        user = mAuth.currentUser!!
+        //Recycler View
+        habit_RecyclerView.adapter = adapter
+        habit_RecyclerView.layoutManager = LinearLayoutManager(this)
+        habit_RecyclerView.setHasFixedSize(true)
     }
 
     private fun openDialog() {
@@ -84,6 +95,7 @@ class UserHabits : AppCompatActivity() {
                 val id = myRef.child("userhabits").push().key
 
                 myRef.child(user.uid).child("userhabits").child(id.toString()).setValue(habit)
+                getAllHabits()
             }
         }
         mDialog.cancelBtnHabit.setOnClickListener {
@@ -93,25 +105,24 @@ class UserHabits : AppCompatActivity() {
 
 
     private fun getAllHabits() {
-        checkUser()
-        myRef = FirebaseDatabase.getInstance().reference
-        myRef = myRef.child(user.uid).child("userhabits")
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.hasChildren()) {
-                    val habitList = ArrayList<UserHabit>()
-                    for (snap in snapshot.children) {
-                        habitList.add(snap.getValue(UserHabit::class.java)!!)
+        habitList.clear()
+        myRef.child(user.uid).child("userhabits")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.hasChildren()) {
+                        for (snap in snapshot.children) {
+                            habitList.add(snap.getValue(UserHabit::class.java)!!)
+                        }
+                        adapter.clearall()
+                        adapter.addAll(habitList)
                     }
-                    adapter.addAll(habitList)
                 }
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                toast(error.toString())
-            }
+                override fun onCancelled(error: DatabaseError) {
+                    toast(error.toString())
+                }
 
-        })
+            })
     }
 
     private fun checkUser() {

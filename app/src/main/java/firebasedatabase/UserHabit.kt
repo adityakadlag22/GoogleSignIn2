@@ -1,6 +1,6 @@
 package firebasedatabase
 
-class UserHabit(var habitName: String, var habitPriority: String, var description: String) {
+data class UserHabit(var habitName: String="", var habitPriority: String="", var description: String="") {
 
 
 
