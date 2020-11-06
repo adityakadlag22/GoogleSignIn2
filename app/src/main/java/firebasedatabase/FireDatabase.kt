@@ -1,6 +1,6 @@
-package FirebaseDatabase
+package firebasedatabase
 
-import FirebaseDatabase.FirebaseRecycler.UserHabits
+import firebasedatabase.firebaserecycler.UserHabits
 import Utils.toast
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

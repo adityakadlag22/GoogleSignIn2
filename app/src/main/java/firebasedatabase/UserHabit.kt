@@ -1,7 +1,4 @@
-package FirebaseDatabase
-
-import android.os.Parcel
-import android.os.Parcelable
+package firebasedatabase
 
 class UserHabit(var habitName: String, var habitPriority: String, var description: String) {
 

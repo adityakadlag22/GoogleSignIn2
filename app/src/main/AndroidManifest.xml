@@ -11,11 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="FirebaseDatabase.FirebaseRecycler.UserHabits"
+        <activity android:name="firebasedatabase.firebaserecycler.UserHabits"
             android:screenOrientation="portrait"/>
-        <activity android:name="FirebaseDatabase.GetUserData"
+        <activity android:name="firebasedatabase.GetUserData"
             android:screenOrientation="portrait"/>
-        <activity android:name="FirebaseDatabase.FireDatabase"
+        <activity android:name="firebasedatabase.FireDatabase"
             android:screenOrientation="portrait"/>
         <activity android:name=".LoginActivity"
             android:screenOrientation="portrait"/>

@@ -1,6 +1,6 @@
-package FirebaseDatabase.FirebaseRecycler
+package firebasedatabase.firebaserecycler
 
-import FirebaseDatabase.UserHabit
+import firebasedatabase.UserHabit
 import Utils.toast
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -24,8 +24,7 @@ import kotlinx.android.synthetic.main.layout_habits_dialog.view.*
 
 class UserHabits : AppCompatActivity() {
     private var database = FirebaseDatabase.getInstance().reference
-    private lateinit var myRef:DatabaseReference
-    private var dataref = database.child("Users")
+    private var myRef=FirebaseDatabase.getInstance().getReference("Users")
     private lateinit var mAuth: FirebaseAuth
     var adapter = HabitsAdapter2(this)
     private lateinit var user: FirebaseUser
@@ -34,7 +33,6 @@ class UserHabits : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_habits)
         mAuth = FirebaseAuth.getInstance()
-        myRef= database.child("Users")
 
         setSupportActionBar(toolBar_habitsAct)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -45,7 +43,6 @@ class UserHabits : AppCompatActivity() {
         habit_RecyclerView.layoutManager = LinearLayoutManager(this)
         habit_RecyclerView.setHasFixedSize(true)
 
-        getAllHabits()
 
         habit_RecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -58,6 +55,7 @@ class UserHabits : AppCompatActivity() {
             }
         })
 
+        getAllHabits()
         habits_FloatingActionBtn.setOnClickListener {
             openDialog()
         }
@@ -94,10 +92,9 @@ class UserHabits : AppCompatActivity() {
     }
 
 
-
-
     private fun getAllHabits() {
-        myRef=FirebaseDatabase.getInstance().reference
+        checkUser()
+        myRef = FirebaseDatabase.getInstance().reference
         myRef = myRef.child(user.uid).child("userhabits")
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -111,7 +108,7 @@ class UserHabits : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                toast(error.toString())
             }
 
         })

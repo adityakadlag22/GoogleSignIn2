@@ -1,6 +1,6 @@
 package cycle.gear.googlesignin2
 
-import FirebaseDatabase.FireDatabase
+import firebasedatabase.FireDatabase
 import Utils.toast
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

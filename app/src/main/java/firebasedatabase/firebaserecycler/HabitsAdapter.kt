@@ -1,6 +1,6 @@
-package FirebaseDatabase.FirebaseRecycler
+package firebasedatabase.firebaserecycler
 
-import FirebaseDatabase.UserHabit
+import firebasedatabase.UserHabit
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
