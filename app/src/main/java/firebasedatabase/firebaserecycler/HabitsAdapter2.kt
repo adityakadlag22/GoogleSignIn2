@@ -63,11 +63,14 @@ class HabitsAdapter2(internal var context: Context) :
 
         holder.itemView.setOnClickListener {
             val key = currentItem.key
-            Toast.makeText(context, key.toString(), Toast.LENGTH_SHORT).show()
+
         }
+
     }
 
     override fun getItemCount(): Int {
         return userList.size
     }
+
+
 }

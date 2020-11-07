@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -22,6 +23,8 @@ import cycle.gear.googlesignin2.LoginActivity
 import cycle.gear.googlesignin2.R
 import kotlinx.android.synthetic.main.activity_user_habits.*
 import kotlinx.android.synthetic.main.layout_habits_dialog.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class UserHabits : AppCompatActivity() {
     private var myRef = FirebaseDatabase.getInstance().getReference("Users")
@@ -54,6 +57,29 @@ class UserHabits : AppCompatActivity() {
         habits_FloatingActionBtn.setOnClickListener {
             openDialog()
         }
+
+        val touchhelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.UP or
+                    ItemTouchHelper.DOWN, 1
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                val source = viewHolder.adapterPosition
+                val targetposition = target.adapterPosition
+                Collections.swap(habitList, source, targetposition)
+                adapter.notifyItemMoved(source, targetposition)
+                return true
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                TODO("Not yet implemented")
+            }
+
+        })
+        touchhelper.attachToRecyclerView(habit_RecyclerView)
     }
 
     private fun init() {
