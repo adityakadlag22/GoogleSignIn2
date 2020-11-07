@@ -93,6 +93,7 @@ class UserHabits : AppCompatActivity() {
                 toast("Fill The Fields")
             } else {
                 val habit = UserHabit(
+                    "",
                     habitName = habitname.toString(),
                     habitprior.toString(),
                     habitdesc.toString()
@@ -100,6 +101,8 @@ class UserHabits : AppCompatActivity() {
                 val id = myRef.child("userhabits").push().key
 
                 myRef.child(user.uid).child("userhabits").child(id.toString()).setValue(habit)
+                myRef.child(user.uid).child("userhabits").child(id.toString())
+                    .child("key").setValue(id.toString())
                 getAllHabits()
             }
         }

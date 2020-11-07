@@ -3,9 +3,10 @@
 
 
 
-<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#a9a9a9"
+    android:background="@color/white"
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
 
