@@ -1,67 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--<com.google.android.material.card.MaterialCardView-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:weightSum="100"-->
-<!--    android:padding="5dp"-->
-<!--    android:layout_height="wrap_content"-->
-<!--    >-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:background="#a9a9a9"
+
+
+
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#a9a9a9"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/lin1"
         android:layout_height="wrap_content"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        >
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/lin1"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/habit"
-                android:layout_weight="40"
-                android:id="@+id/user_Habit"
-                android:textSize="28sp"
-                android:layout_marginTop="10sp"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                />
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="5"
-                />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="30"
-                android:textSize="35sp"
-                android:id="@+id/habit_priority"
-                android:textAlignment="center"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:text="@string/_10"
-                android:gravity="center_horizontal" />
-        </LinearLayout>
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/user_Habit"
             android:layout_height="wrap_content"
-            android:id="@+id/habitdesc"
-            android:layout_below="@id/lin1"
-            android:text="@string/all_user_description"
-            android:textAlignment="textStart"
-            android:gravity="start"
-            android:textSize="18sp"
-            android:layout_marginStart="18dp"
-            android:layout_marginEnd="18dp"/>
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10sp"
+            android:layout_weight="40"
+            android:layout_width="0dp"
+            android:text="@string/habit"
+            android:textSize="28sp" />
+
+        <View
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:layout_width="0dp" />
+
+        <TextView
+            android:gravity="center_horizontal"
+            android:id="@+id/habit_priority"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="30"
+            android:layout_width="0dp"
+            android:text="@string/_10"
+            android:textAlignment="center"
+            android:textSize="35sp" />
+    </LinearLayout>
+
+    <TextView
+        android:gravity="start"
+        android:id="@+id/habitdesc"
+        android:layout_below="@id/lin1"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:layout_marginStart="18dp"
+        android:layout_width="wrap_content"
+        android:text="@string/all_user_description"
+        android:textAlignment="textStart"
+        android:textSize="18sp" />
 
 
-    </RelativeLayout>
-<!--</com.google.android.material.card.MaterialCardView>-->
+</RelativeLayout>

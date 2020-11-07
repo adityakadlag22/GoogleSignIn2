@@ -44,6 +44,7 @@ class HabitsAdapter2(internal var context: Context) : RecyclerView.Adapter<Habit
             habitDesc = itemView.habitdesc
         }
 
+
     }
 
 

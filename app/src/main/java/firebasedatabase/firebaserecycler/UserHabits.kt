@@ -70,6 +70,7 @@ class UserHabits : AppCompatActivity() {
         habit_RecyclerView.adapter = adapter
         habit_RecyclerView.layoutManager = LinearLayoutManager(this)
         habit_RecyclerView.setHasFixedSize(true)
+
         habit_RecyclerView.addItemDecoration(
             DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
         )
