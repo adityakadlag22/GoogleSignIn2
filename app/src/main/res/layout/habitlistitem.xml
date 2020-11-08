@@ -1,63 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-
-
-<RelativeLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/white"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_width="match_parent">
+    android:background="@color/white"
+    android:orientation="vertical">
 
 
     <LinearLayout
         android:id="@+id/lin1"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/user_Habit"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="18dp"
             android:layout_marginTop="10sp"
-            android:layout_weight="40"
-            android:layout_width="0dp"
+            android:layout_marginEnd="18dp"
             android:text="@string/habit"
             android:textSize="28sp" />
 
         <View
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:layout_width="0dp" />
+            android:layout_weight="5" />
 
         <TextView
-            android:gravity="center_horizontal"
             android:id="@+id/habit_priority"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_weight="30"
-            android:layout_width="0dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"
+            android:gravity="center_horizontal"
             android:text="@string/_10"
             android:textAlignment="center"
             android:textSize="35sp" />
     </LinearLayout>
 
     <TextView
-        android:gravity="start"
         android:id="@+id/habitdesc"
-        android:layout_below="@id/lin1"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="18dp"
-        android:layout_marginStart="18dp"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:gravity="start"
         android:text="@string/all_user_description"
         android:textAlignment="textStart"
         android:textSize="18sp" />
 
 
-</RelativeLayout>
+</LinearLayout>
