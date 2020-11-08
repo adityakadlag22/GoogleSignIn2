@@ -60,7 +60,7 @@ class UserHabits : AppCompatActivity() {
 
         val touchhelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or
-                    ItemTouchHelper.DOWN, 1
+                    ItemTouchHelper.DOWN, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         ) {
             override fun onMove(
                 recyclerView: RecyclerView,
@@ -75,7 +75,22 @@ class UserHabits : AppCompatActivity() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                TODO("Not yet implemented")
+                val position = viewHolder.adapterPosition
+                when (direction) {
+                    ItemTouchHelper.LEFT -> {
+                        val habit = habitList[position]
+                        val key = habit.key
+                        myRef.child(user.uid).child("userhabits").child(key).removeValue()
+                        habitList.removeAt(position)
+                        //adapter.notifyItemRemoved(position)
+                        getAllHabits()
+
+                    }
+                    ItemTouchHelper.RIGHT -> {
+
+
+                    }
+                }
             }
 
         })
@@ -118,17 +133,16 @@ class UserHabits : AppCompatActivity() {
             if (habitname.isEmpty() || habitdesc.isEmpty() || habitprior.isEmpty()) {
                 toast("Fill The Fields")
             } else {
+
+                val id = myRef.child("userhabits").push().key
                 val habit = UserHabit(
-                    "",
+                    id.toString(),
                     habitName = habitname.toString(),
                     habitprior.toString(),
                     habitdesc.toString()
                 )
-                val id = myRef.child("userhabits").push().key
-
                 myRef.child(user.uid).child("userhabits").child(id.toString()).setValue(habit)
-                myRef.child(user.uid).child("userhabits").child(id.toString())
-                    .child("key").setValue(id.toString())
+
                 getAllHabits()
             }
         }
@@ -147,8 +161,8 @@ class UserHabits : AppCompatActivity() {
                         for (snap in snapshot.children) {
                             habitList.add(snap.getValue(UserHabit::class.java)!!)
                         }
-                        adapter.clearall()
                         adapter.addAll(habitList)
+                        adapter.notifyDataSetChanged()
                     }
                 }
 

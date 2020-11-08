@@ -21,6 +21,7 @@ class HabitsAdapter2(internal var context: Context) :
 
     fun addAll(newhabits: List<UserHabit>) {
         val init = userList.size
+        userList.clear()
         userList.addAll(newhabits)
         notifyItemRangeChanged(init, userList.size)
     }

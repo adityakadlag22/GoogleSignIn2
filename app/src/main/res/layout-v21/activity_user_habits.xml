@@ -11,12 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:id="@+id/appbarLay2"
+        app:titleTextColor="@color/black"
         >
-       <com.google.android.material.appbar.MaterialToolbar
-           android:layout_width="match_parent"
-           app:title="@string/user_habits"
-           android:layout_height="?attr/actionBarSize"
-           android:id="@+id/toolBar_habitsAct"/>
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            app:title="@string/user_habits"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/toolBar_habitsAct"
+            tools:targetApi="lollipop" />
     </com.google.android.material.appbar.AppBarLayout>
 
 
@@ -24,6 +26,8 @@
         android:id="@+id/habit_RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="vertical"
+
         android:layout_below="@id/appbarLay2"
         android:clipToPadding="false"
         android:padding="4dp"
@@ -43,5 +47,5 @@
         android:layout_margin="16dp"
         android:src="@drawable/plus"
         app:fabSize="normal"
-        android:layout_alignParentRight="true" />
+        android:contentDescription="@string/todo" />
 </RelativeLayout>
