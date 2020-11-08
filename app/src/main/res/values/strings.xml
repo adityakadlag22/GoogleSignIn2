@@ -26,6 +26,10 @@
     <string name="cancel">Cancel</string>
     <string name="description">Description</string>
     <string name="priority">Priority</string>
+    <string name="firebase_functions">Firebase Functions</string>
+    <string name="view">View</string>
+    <string name="upload">Upload</string>
+    <string name="choose">Choose</string>
 
 
 </resources>

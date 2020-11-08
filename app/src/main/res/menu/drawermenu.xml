@@ -12,8 +12,8 @@
                   android:id="@+id/firebaseDatabase"
                   />
               <item
-                  android:title="@string/email_auth"
-                  android:id="@+id/emailAuth"
+                  android:title="@string/firebase_functions"
+                  android:id="@+id/fireFunctions"
                   />
               <item android:title="@string/fcm"
                   android:id="@+id/fireFCM"/>

@@ -9,6 +9,9 @@ import com.google.android.material.snackbar.Snackbar
 fun Context.toast(message: String): Unit {
     Toast.makeText(this, message, Toast.LENGTH_SHORT ).show()
 }
+fun Context.toastLong(message: String): Unit {
+    Toast.makeText(this, message, Toast.LENGTH_LONG ).show()
+}
 
 fun ProgressBar.show(){
     visibility = View.VISIBLE

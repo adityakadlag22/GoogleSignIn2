@@ -11,6 +11,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import com.google.firebase.auth.FirebaseAuth
+import firestorage.UploadStorage
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.firebaseDatabase -> {
                     Intent(this, FireDatabase::class.java).also {
-                    startActivity(it)
+                        startActivity(it)
                     }
                 }
 
@@ -44,8 +45,8 @@ class MainActivity : AppCompatActivity() {
                     toast("Working on Firebase FCM ")
                 }
 
-                R.id.emailAuth -> {
-                    toast("Working on Firebase Email Auth ")
+                R.id.fireFunctions -> {
+                    toast("Working on Firebase Fun")
                 }
 
                 R.id.bottomNav -> {
@@ -56,8 +57,10 @@ class MainActivity : AppCompatActivity() {
                     toast("Working on Tab Layout ")
                 }
 
-                R.id.fireStorage->{
-                    toast("Working on it")
+                R.id.fireStorage -> {
+                    Intent(this, UploadStorage::class.java).also {
+                        startActivity(it)
+                    }
                 }
 
                 R.id.signOutTabNav -> {

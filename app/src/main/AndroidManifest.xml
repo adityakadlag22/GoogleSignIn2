@@ -3,6 +3,7 @@
     package="cycle.gear.googlesignin2">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -11,14 +12,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="firebasedatabase.firebaserecycler.UserHabits"
+        <activity android:name="firestorage.GridActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="firebasedatabase.GetUserData"
-            android:screenOrientation="portrait"/>
-        <activity android:name="firebasedatabase.FireDatabase"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".LoginActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name="firestorage.UploadStorage" />
+        <activity
+            android:name="firebasedatabase.firebaserecycler.UserHabits"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="firebasedatabase.GetUserData"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="firebasedatabase.FireDatabase"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
