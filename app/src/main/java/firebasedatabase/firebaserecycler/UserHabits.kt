@@ -22,7 +22,6 @@ import com.google.firebase.database.*
 import cycle.gear.googlesignin2.LoginActivity
 import cycle.gear.googlesignin2.R
 import kotlinx.android.synthetic.main.activity_user_habits.*
-import kotlinx.android.synthetic.main.layout_habits_dialog.*
 import kotlinx.android.synthetic.main.layout_habits_dialog.view.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -87,7 +86,7 @@ class UserHabits : AppCompatActivity() {
 
                     }
                     ItemTouchHelper.RIGHT -> {
-                    openDialogForEdit(position)
+                        openDialogForEdit(position)
                     }
                 }
             }
@@ -102,12 +101,15 @@ class UserHabits : AppCompatActivity() {
             .setView(mDialog)
             .setTitle("Edit Habit")
         val mAlertDialog = mBuilder.show()
+        val habit = habitList[position]
+
+
+        mDialog.userHabitName_edit.setText(habit.habitName)
+        mDialog.userHabitDesc_edit.setText(habit.description)
+        mDialog.userHabitPrior_edit.setText(habit.habitPriority)
         mDialog.addBtnHabit.setOnClickListener {
             mAlertDialog.dismiss()
-            val habit=habitList[position]
-//            userHabitName_edit.setText(habit.habitName)
-//            userHabitDesc_edit.setText(habit.description)
-//            userHabitPrior_edit.setText(habit.habitPriority)
+
 
             val habitname = mDialog.userHabitName_edit.text
             val habitdesc = mDialog.userHabitDesc_edit.text
@@ -124,7 +126,7 @@ class UserHabits : AppCompatActivity() {
                     habitprior.toString(),
                     habitdesc.toString()
                 )
-                val key=habit.key
+                val key = habit.key
                 myRef.child(user.uid).child("userhabits").child(key).setValue(habit2)
 
                 getAllHabits()
