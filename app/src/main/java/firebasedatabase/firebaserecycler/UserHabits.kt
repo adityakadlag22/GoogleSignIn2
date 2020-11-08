@@ -22,6 +22,7 @@ import com.google.firebase.database.*
 import cycle.gear.googlesignin2.LoginActivity
 import cycle.gear.googlesignin2.R
 import kotlinx.android.synthetic.main.activity_user_habits.*
+import kotlinx.android.synthetic.main.layout_habits_dialog.*
 import kotlinx.android.synthetic.main.layout_habits_dialog.view.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -82,19 +83,56 @@ class UserHabits : AppCompatActivity() {
                         val key = habit.key
                         myRef.child(user.uid).child("userhabits").child(key).removeValue()
                         habitList.removeAt(position)
-                        //adapter.notifyItemRemoved(position)
                         getAllHabits()
 
                     }
                     ItemTouchHelper.RIGHT -> {
-
-
+                    openDialogForEdit(position)
                     }
                 }
             }
 
         })
         touchhelper.attachToRecyclerView(habit_RecyclerView)
+    }
+
+    private fun openDialogForEdit(position: Int) {
+        val mDialog = LayoutInflater.from(this).inflate(R.layout.layout_habits_dialog, null)
+        val mBuilder = AlertDialog.Builder(this)
+            .setView(mDialog)
+            .setTitle("Edit Habit")
+        val mAlertDialog = mBuilder.show()
+        mDialog.addBtnHabit.setOnClickListener {
+            mAlertDialog.dismiss()
+            val habit=habitList[position]
+//            userHabitName_edit.setText(habit.habitName)
+//            userHabitDesc_edit.setText(habit.description)
+//            userHabitPrior_edit.setText(habit.habitPriority)
+
+            val habitname = mDialog.userHabitName_edit.text
+            val habitdesc = mDialog.userHabitDesc_edit.text
+            val habitprior = mDialog.userHabitPrior_edit.text
+
+            if (habitname.isEmpty() || habitdesc.isEmpty() || habitprior.isEmpty()) {
+                toast("Fill The Fields")
+            } else {
+
+                val id = myRef.child("userhabits").push().key
+                val habit2 = UserHabit(
+                    id.toString(),
+                    habitName = habitname.toString(),
+                    habitprior.toString(),
+                    habitdesc.toString()
+                )
+                val key=habit.key
+                myRef.child(user.uid).child("userhabits").child(key).setValue(habit2)
+
+                getAllHabits()
+            }
+        }
+        mDialog.cancelBtnHabit.setOnClickListener {
+            mAlertDialog.dismiss()
+        }
     }
 
     private fun init() {
