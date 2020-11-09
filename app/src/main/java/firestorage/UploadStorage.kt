@@ -28,6 +28,7 @@ class UploadStorage : AppCompatActivity() {
     private lateinit var chooserFilePath: Uri
     var downImgUrl: String = ""
     private val TAG = "UploadStorage"
+    private var content=""
     private var myRef = FirebaseDatabase.getInstance().getReference("Users")
     private lateinit var mAuth: FirebaseAuth
     private lateinit var user: FirebaseUser
@@ -39,7 +40,15 @@ class UploadStorage : AppCompatActivity() {
             openFileChooser()
         }
         uploadBtn.setOnClickListener {
-            uploadImageFile2()
+            when(content)
+            {
+                "image/jpeg" -> {
+                    uploadImageFile2()
+                }
+                "video/mp4" -> {
+                    uploadVidFile2()
+                }
+                }
         }
     }
 
@@ -59,6 +68,32 @@ class UploadStorage : AppCompatActivity() {
 
 
 
+    private fun uploadVidFile2() {
+        val pd = ProgressDialog(this)
+        pd.setTitle("Uploading")
+        pd.show()
+        val id = myRef.child("userhabits").push().key
+        val imageRef = FirebaseStorage.getInstance().reference.child("userVideos").child(id.toString())
+        val uploadtask = imageRef.putFile(chooserFilePath)
+        val task = uploadtask.continueWithTask { task ->
+            if (!task.isSuccessful) {
+                toast("error ${task.exception.toString()}")
+            }
+            imageRef.downloadUrl
+        }.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val demourl = task.result
+                downImgUrl = demourl!!.toString()
+                myRef.child(user.uid).child("userdata").child("videos").child(id.toString())
+                    .setValue(downImgUrl)
+                uploadBtn.visibility=View.GONE
+                Intent(this,MainActivity::class.java).also {
+                    startActivity(it)
+                }
+                pd.dismiss()
+            }
+        }
+    }
     private fun uploadImageFile2() {
         val pd = ProgressDialog(this)
         pd.setTitle("Uploading")
@@ -95,6 +130,7 @@ class UploadStorage : AppCompatActivity() {
             Log.d(TAG, "onActivityResult: Data is $type")
             when (type) {
                 "image/jpeg" -> {
+                    content=type
                     val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, chooserFilePath)
                     storageImgView.visibility = View.VISIBLE
                     storageVidView.visibility = View.GONE
@@ -106,6 +142,7 @@ class UploadStorage : AppCompatActivity() {
                     toast("Working on Music")
                 }
                 "video/mp4" -> {
+                    content=type
                     storageImgView.visibility = View.GONE
                     storageVidView.visibility = View.VISIBLE
                     storageVidView.setVideoURI(chooserFilePath)
