@@ -30,6 +30,7 @@
     <string name="view">View</string>
     <string name="upload">Upload</string>
     <string name="choose">Choose</string>
+    <string name="view_data">View Data</string>
 
 
 </resources>

@@ -50,6 +50,10 @@ class UploadStorage : AppCompatActivity() {
                 }
                 }
         }
+        viewData.setOnClickListener {
+            Intent(this,GridActivity::class.java)
+                .also { startActivity(it) }
+        }
     }
 
     private fun initAll() {
@@ -73,7 +77,7 @@ class UploadStorage : AppCompatActivity() {
         pd.setTitle("Uploading")
         pd.show()
         val id = myRef.child("userhabits").push().key
-        val imageRef = FirebaseStorage.getInstance().reference.child("userVideos").child(id.toString())
+        val imageRef = FirebaseStorage.getInstance().reference.child("userVideo").child(id.toString())
         val uploadtask = imageRef.putFile(chooserFilePath)
         val task = uploadtask.continueWithTask { task ->
             if (!task.isSuccessful) {
@@ -84,8 +88,10 @@ class UploadStorage : AppCompatActivity() {
             if (task.isSuccessful) {
                 val demourl = task.result
                 downImgUrl = demourl!!.toString()
-                myRef.child(user.uid).child("userdata").child("videos").child(id.toString())
-                    .setValue(downImgUrl)
+                myRef.child(user.uid).child("userdata").child("userContent").child(id.toString())
+                    .child("downloadurl").setValue(downImgUrl)
+                myRef.child(user.uid).child("userdata").child("userContent").child(id.toString())
+                    .child("type").setValue("video")
                 uploadBtn.visibility=View.GONE
                 Intent(this,MainActivity::class.java).also {
                     startActivity(it)
@@ -99,7 +105,7 @@ class UploadStorage : AppCompatActivity() {
         pd.setTitle("Uploading")
         pd.show()
         val id = myRef.child("userhabits").push().key
-        val imageRef = FirebaseStorage.getInstance().reference.child("userImages").child(id.toString())
+        val imageRef = FirebaseStorage.getInstance().reference.child("userImage").child(id.toString())
         val uploadtask = imageRef.putFile(chooserFilePath)
         val task = uploadtask.continueWithTask { task ->
             if (!task.isSuccessful) {
@@ -110,8 +116,11 @@ class UploadStorage : AppCompatActivity() {
             if (task.isSuccessful) {
                 val demourl = task.result
                 downImgUrl = demourl!!.toString()
-                myRef.child(user.uid).child("userdata").child("images").child(id.toString())
-                    .setValue(downImgUrl)
+                myRef.child(user.uid).child("userdata").child("userContent").child(id.toString())
+                    .child("downloadurl").setValue(downImgUrl)
+
+                myRef.child(user.uid).child("userdata").child("userContent").child(id.toString())
+                    .child("type").setValue("image")
                 uploadBtn.visibility=View.GONE
                 Intent(this,MainActivity::class.java).also {
                     startActivity(it)
