@@ -1,6 +1,5 @@
 package firestorage
 
-import Utils.toast
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -34,7 +33,7 @@ class GridActivity : AppCompatActivity() {
         setContentView(R.layout.activity_grid)
         initAll()
         loadAllItems()
-        //loadAllItems2()
+//        loadAllItems2()
 
     }
 
@@ -61,8 +60,8 @@ class GridActivity : AppCompatActivity() {
 //        val storageRef = storage.reference.child("userVideo")
 //        val listAllTasks: Task<ListResult> = storageRef.listAll()
 //        listAllTasks.addOnCompleteListener { result ->
-//            val images: List<StorageReference> = result.result!!.items
-//            images.forEachIndexed { index, item ->
+//            val videos: List<StorageReference> = result.result!!.items
+//            videos.forEachIndexed { index, item ->
 //                item.downloadUrl.addOnSuccessListener {
 //                    imageList.add(modelcontent2(it.toString()))
 //
