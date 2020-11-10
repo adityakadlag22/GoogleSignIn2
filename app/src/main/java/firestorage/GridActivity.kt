@@ -40,6 +40,7 @@ class GridActivity : AppCompatActivity() {
     fun loadAllItems() {
         val storage = FirebaseStorage.getInstance()
         val storageRef = storage.reference.child("userImage")
+            .child(user.uid)
         val listAllTasks: Task<ListResult> = storageRef.listAll()
         listAllTasks.addOnCompleteListener { result ->
             val images: List<StorageReference> = result.result!!.items

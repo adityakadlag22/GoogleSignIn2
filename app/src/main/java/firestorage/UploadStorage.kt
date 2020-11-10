@@ -77,7 +77,8 @@ class UploadStorage : AppCompatActivity() {
         pd.setTitle("Uploading")
         pd.show()
         val id = myRef.child("userhabits").push().key
-        val imageRef = FirebaseStorage.getInstance().reference.child("userVideo").child(id.toString())
+        val imageRef = FirebaseStorage.getInstance().reference.child("userVideo").
+            child(user.uid).child(id.toString())
         val uploadtask = imageRef.putFile(chooserFilePath)
         val task = uploadtask.continueWithTask { task ->
             if (!task.isSuccessful) {
@@ -105,7 +106,8 @@ class UploadStorage : AppCompatActivity() {
         pd.setTitle("Uploading")
         pd.show()
         val id = myRef.child("userhabits").push().key
-        val imageRef = FirebaseStorage.getInstance().reference.child("userImage").child(id.toString())
+        val imageRef = FirebaseStorage.getInstance().reference.child("userImage").
+        child(user.uid).child(id.toString())
         val uploadtask = imageRef.putFile(chooserFilePath)
         val task = uploadtask.continueWithTask { task ->
             if (!task.isSuccessful) {
