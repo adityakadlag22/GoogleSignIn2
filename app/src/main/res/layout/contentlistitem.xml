@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="250dp"
+    android:background="@color/white"
     style="@style/CardView.Light"
     app:cardCornerRadius="18dp"
     android:layout_marginStart="12dp"

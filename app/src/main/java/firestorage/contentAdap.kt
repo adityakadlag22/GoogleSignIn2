@@ -10,8 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import cycle.gear.googlesignin2.R
 import firestorage.models.modelcontent
+import firestorage.models.modelcontent2
 
-class contentAdap(private var items: List<modelcontent>, private val context: Context) :
+class contentAdap(private var items: List<modelcontent2>, private val context: Context) :
     RecyclerView.Adapter<contentAdap.ViewHolder>() {
 
 
@@ -26,17 +27,18 @@ class contentAdap(private var items: List<modelcontent>, private val context: Co
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.videoView.visibility = View.GONE
         val item = items[position]
-        when (item.type) {
-            "video" -> {
-
-                holder.imageView.visibility=View.GONE
-            }
-            "image" -> {
-                Picasso.get().load(item.downloadURI).into(holder.imageView)
-                holder.videoView.visibility=View.GONE
-            }
-        }
+//        when (item.type) {
+//            "video" -> {
+//
+//                holder.imageView.visibility=View.GONE
+//            }
+//            "image" -> {
+//
+//            }
+//        }
+        Picasso.get().load(item.downloadURI).into(holder.imageView)
 
     }
 
