@@ -2,26 +2,41 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    style="@style/CardView.Light"
     android:layout_width="match_parent"
     android:layout_height="250dp"
-    android:background="@color/white"
-    style="@style/CardView.Light"
-    app:cardCornerRadius="18dp"
     android:layout_marginStart="12dp"
     android:layout_marginTop="12dp"
-    android:layout_marginEnd="12dp">
+    android:layout_marginEnd="12dp"
+    android:background="@color/white"
+    android:orientation="vertical"
+    app:cardCornerRadius="18dp">
 
-    <ImageView
-        android:id="@+id/imageViewListItem"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:scaleType="centerCrop"
-        android:contentDescription="@string/todo" />
-    <VideoView
-        android:id="@+id/videoViewListItem"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:scaleType="centerCrop"/>
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageViewListItem"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:visibility="gone"
+            android:contentDescription="@string/todo"
+            />
+
+        <VideoView
+            android:id="@+id/videoViewListItem"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+             android:visibility="gone"/>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:id="@+id/listItemProgress"
+            android:layout_gravity="center_horizontal"
+            />
+    </FrameLayout>
+
 
 </androidx.cardview.widget.CardView>

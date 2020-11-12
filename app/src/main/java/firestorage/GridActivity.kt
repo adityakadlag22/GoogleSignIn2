@@ -22,15 +22,14 @@ import cycle.gear.googlesignin2.R
 import firestorage.models.modelcontent
 
 import kotlinx.android.synthetic.main.activity_grid.*
+import kotlinx.android.synthetic.main.contentlistitem.*
 
 class GridActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private val TAG = "GridActivity"
     private lateinit var user: FirebaseUser
     private val fullList = ArrayList<modelcontent>()
-    private val imageList = ArrayList<modelcontent>()
-    private val videoList = ArrayList<modelcontent>()
-    private val adapter = ContentAdap(imageList, this)
+    private val adapter = ContentAdapter(fullList, this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +37,7 @@ class GridActivity : AppCompatActivity() {
         initAll()
         loadAllItems()
         loadAllItems2()
-        addBoth()
+
 
     }
 
@@ -51,7 +50,7 @@ class GridActivity : AppCompatActivity() {
             val images: List<StorageReference> = result.result!!.items
             images.forEachIndexed { _, item ->
                 item.downloadUrl.addOnSuccessListener {
-                    imageList.add(modelcontent(it.toString(), "image"))
+                    fullList.add(modelcontent(it.toString(), "image"))
 
                 }.addOnCompleteListener {
                     content_RecyclerView.adapter = adapter
@@ -71,22 +70,23 @@ class GridActivity : AppCompatActivity() {
             val videos: List<StorageReference> = result.result!!.items
             videos.forEachIndexed { _, item ->
                 item.downloadUrl.addOnSuccessListener {
-                    videoList.add(modelcontent(it.toString(), "video"))
+                    fullList.add(modelcontent(it.toString(), "video"))
 
                 }.addOnCompleteListener {
                     toast("vid loaded")
+
+                    content_RecyclerView.adapter = ContentAdapter(fullList, this)
+                    content_RecyclerView.layoutManager = GridLayoutManager(this, 2)
                 }
             }
         }
     }
 
-    private fun addBoth() {
-        fullList.addAll(imageList)
-        fullList.addAll(videoList)
-
-        content_RecyclerView.adapter = ContentAdap(fullList, this)
-        content_RecyclerView.layoutManager = GridLayoutManager(this, 2)
-    }
+//    private fun addBoth() {
+//        fullList.addAll(imageList)
+//        fullList.addAll(videoList)
+//
+//    }
 
     private fun initAll() {
         mAuth = FirebaseAuth.getInstance()

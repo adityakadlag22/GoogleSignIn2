@@ -80,7 +80,7 @@ class UploadStorage : AppCompatActivity() {
         val imageRef = FirebaseStorage.getInstance().reference.child("userVideo").
             child(user.uid).child(id.toString())
         val uploadtask = imageRef.putFile(chooserFilePath)
-        val task = uploadtask.continueWithTask { task ->
+        uploadtask.continueWithTask { task ->
             if (!task.isSuccessful) {
                 toast("error ${task.exception.toString()}")
             }
@@ -109,7 +109,7 @@ class UploadStorage : AppCompatActivity() {
         val imageRef = FirebaseStorage.getInstance().reference.child("userImage").
         child(user.uid).child(id.toString())
         val uploadtask = imageRef.putFile(chooserFilePath)
-        val task = uploadtask.continueWithTask { task ->
+        uploadtask.continueWithTask { task ->
             if (!task.isSuccessful) {
                 toast("error ${task.exception.toString()}")
             }

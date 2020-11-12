@@ -14,7 +14,8 @@
         android:theme="@style/AppTheme">
         <activity android:name="firestorage.GridActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="firestorage.UploadStorage" />
+        <activity android:name="firestorage.UploadStorage"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="firebasedatabase.firebaserecycler.UserHabits"
             android:screenOrientation="portrait" />
