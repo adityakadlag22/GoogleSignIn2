@@ -54,7 +54,6 @@ class GridActivity : AppCompatActivity() {
 
                 }.addOnCompleteListener {
                     content_RecyclerView.adapter = adapter
-                    content_RecyclerView.layoutManager = LinearLayoutManager(this)
                     Log.d(TAG, "loadAllItems: images loaded")
                 }
             }
@@ -92,6 +91,8 @@ class GridActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
         checkUser()
         user = mAuth.currentUser!!
+        content_RecyclerView.layoutManager = LinearLayoutManager(this)
+
     }
 
     private fun checkUser() {
