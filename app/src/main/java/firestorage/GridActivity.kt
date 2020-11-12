@@ -1,5 +1,6 @@
 package firestorage
 
+import Utils.toast
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,73 +8,85 @@ import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ListResult
 import com.google.firebase.storage.StorageReference
 
 import cycle.gear.googlesignin2.LoginActivity
 import cycle.gear.googlesignin2.R
+import firestorage.models.modelcontent
 
-import firestorage.models.modelcontent2
 import kotlinx.android.synthetic.main.activity_grid.*
 
 class GridActivity : AppCompatActivity() {
-    private var myRef = FirebaseDatabase.getInstance().getReference("Users")
     private lateinit var mAuth: FirebaseAuth
     private val TAG = "GridActivity"
     private lateinit var user: FirebaseUser
-    val imageList = ArrayList<modelcontent2>()
+    private val fullList = ArrayList<modelcontent>()
+    private val imageList = ArrayList<modelcontent>()
+    private val videoList = ArrayList<modelcontent>()
+    private val adapter = ContentAdap(imageList, this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_grid)
         initAll()
         loadAllItems()
-//        loadAllItems2()
+        loadAllItems2()
+        addBoth()
 
     }
 
-    fun loadAllItems() {
+    private fun loadAllItems() {
         val storage = FirebaseStorage.getInstance()
         val storageRef = storage.reference.child("userImage")
             .child(user.uid)
         val listAllTasks: Task<ListResult> = storageRef.listAll()
         listAllTasks.addOnCompleteListener { result ->
             val images: List<StorageReference> = result.result!!.items
-            images.forEachIndexed { index, item ->
+            images.forEachIndexed { _, item ->
                 item.downloadUrl.addOnSuccessListener {
-                    imageList.add(modelcontent2(it.toString()))
+                    imageList.add(modelcontent(it.toString(), "image"))
 
                 }.addOnCompleteListener {
-                    content_RecyclerView.adapter = contentAdap(imageList, this)
-                    content_RecyclerView.layoutManager = GridLayoutManager(this,2)
-
+                    content_RecyclerView.adapter = adapter
+                    content_RecyclerView.layoutManager = LinearLayoutManager(this)
+                    Log.d(TAG, "loadAllItems: images loaded")
                 }
             }
         }
     }
-//    fun loadAllItems2() {
-//        val storage = FirebaseStorage.getInstance()
-//        val storageRef = storage.reference.child("userVideo")
-//        val listAllTasks: Task<ListResult> = storageRef.listAll()
-//        listAllTasks.addOnCompleteListener { result ->
-//            val videos: List<StorageReference> = result.result!!.items
-//            videos.forEachIndexed { index, item ->
-//                item.downloadUrl.addOnSuccessListener {
-//                    imageList.add(modelcontent2(it.toString()))
-//
-//                }.addOnCompleteListener {
-//                    content_RecyclerView.adapter = contentAdap(imageList, this)
-//                    content_RecyclerView.layoutManager = GridLayoutManager(this,2)
-//
-//                }
-//            }
-//        }
-//    }
+
+    private fun loadAllItems2() {
+        val storage = FirebaseStorage.getInstance()
+        val storageRef = storage.reference.child("userVideo")
+            .child(user.uid)
+        val listAllTasks: Task<ListResult> = storageRef.listAll()
+        listAllTasks.addOnCompleteListener { result ->
+            val videos: List<StorageReference> = result.result!!.items
+            videos.forEachIndexed { _, item ->
+                item.downloadUrl.addOnSuccessListener {
+                    videoList.add(modelcontent(it.toString(), "video"))
+
+                }.addOnCompleteListener {
+                    toast("vid loaded")
+                }
+            }
+        }
+    }
+
+    private fun addBoth() {
+        fullList.addAll(imageList)
+        fullList.addAll(videoList)
+
+        content_RecyclerView.adapter = ContentAdap(fullList, this)
+        content_RecyclerView.layoutManager = GridLayoutManager(this, 2)
+    }
 
     private fun initAll() {
         mAuth = FirebaseAuth.getInstance()
