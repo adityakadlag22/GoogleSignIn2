@@ -36,7 +36,6 @@ class GridActivity : AppCompatActivity() {
         setContentView(R.layout.activity_grid)
         initAll()
         loadAllItems()
-        loadAllItems2()
 
 
     }
@@ -58,14 +57,13 @@ class GridActivity : AppCompatActivity() {
                 }
             }
         }
-    }
 
-    private fun loadAllItems2() {
-        val storage = FirebaseStorage.getInstance()
-        val storageRef = storage.reference.child("userVideo")
+
+        val storage2 = FirebaseStorage.getInstance()
+        val storageRef2 = storage2.reference.child("userVideo")
             .child(user.uid)
-        val listAllTasks: Task<ListResult> = storageRef.listAll()
-        listAllTasks.addOnCompleteListener { result ->
+        val listAllTasks2: Task<ListResult> = storageRef2.listAll()
+        listAllTasks2.addOnCompleteListener { result ->
             val videos: List<StorageReference> = result.result!!.items
             videos.forEachIndexed { _, item ->
                 item.downloadUrl.addOnSuccessListener {
@@ -75,24 +73,20 @@ class GridActivity : AppCompatActivity() {
                     toast("vid loaded")
 
                     content_RecyclerView.adapter = ContentAdapter(fullList, this)
-                    content_RecyclerView.layoutManager = GridLayoutManager(this, 2)
+                    content_RecyclerView.layoutManager = LinearLayoutManager(this)
                 }
             }
         }
     }
 
-//    private fun addBoth() {
-//        fullList.addAll(imageList)
-//        fullList.addAll(videoList)
-//
-//    }
+
+
+
 
     private fun initAll() {
         mAuth = FirebaseAuth.getInstance()
         checkUser()
         user = mAuth.currentUser!!
-        content_RecyclerView.layoutManager = LinearLayoutManager(this)
-
     }
 
     private fun checkUser() {
